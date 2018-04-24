@@ -18,11 +18,18 @@ namespace MotorMeasurement
         DEVICE_GET_STATUS_REQUEST = 0x24,
         DEVICE_GET_STATUS_RESPONSE = 0x25,
 
-        DEVICE_SET_POSITION = 0x26,
-
         TESTING_MODE_ON = 0x30,
         TESTING_MODE_OFF = 0x31,
         REPORT_CURRENT_SPEED = 0x32,
+
+        REGULATED_ANGLE_SET = 0x40,
+        REGULATED_ANGLE_REACHED = 0x41,
+        REGULATED_POSITION_SET = 0x42,
+        REGULATED_POSITION_REACHED = 0x43,
+
+        REGULATOR_PARAMETERS_SET = 0x50,
+        REGULATOR_PARAMETERS_GET_REQUEST = 0x51,
+        REGULATOR_PARAMETERS_GET_RESPONSE = 0x52,
     }
     
     class Packet
@@ -75,5 +82,22 @@ namespace MotorMeasurement
     {
         public short SpeedL;
         public short SpeedR;
+    }
+
+
+    [StructLayout(LayoutKind.Sequential, Pack = 1)]
+    public struct MotorSetDistancePayload
+    {
+        public short Speed;
+        public short Distance;
+    }
+
+    [StructLayout(LayoutKind.Sequential, Pack = 1)]
+    public struct RegulatorParametersPayload
+    {
+        public short Speed_P;
+        public short Speed_I;
+        public short Position_P;
+        public short Position_I;
     }
 }
